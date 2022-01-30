@@ -1,34 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/25 23:00:44 by fporto            #+#    #+#             */
+/*   Updated: 2022/01/27 23:10:41 by fporto           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-static int	parse_map(t_game *game, int fd)
-{
-	// int		fd;
-	int		i;
-	int		ret;
-	char	*line;
-
-	i = 0;
-	// fd = open(map, O_RDONLY);
-	ret = 1;
-	game->map = ft_calloc(game->height, sizeof(char *));
-	while (ret > 0)
-	{
-		ret = get_next_line(fd, &line);
-		if (ft_strlen(line) > 0)
-			game->map[i++] = line;
-		else
-			free(line);
-	}
-	// printf("Width: %d\nHeight: %d\n", game->width, game->height);
-	// for (int j = 0; i < game->height; i++)
-	// {
-	// 	printf("%s\n", game->map[j]);
-	// }
-	close(fd);
-	return (ret);
-}
-
-int		is_horizontal_wall(char *line)
+int	is_horizontal_wall(char *line)
 {
 	while (*line)
 		if (*line++ != '1')
@@ -36,55 +20,120 @@ int		is_horizontal_wall(char *line)
 	return (1);
 }
 
-int		check_border(t_app *app, char *line)
+void	check_sides(t_app *app, char *line)
 {
-	while (app->game.height == 1 && *line == '1')
+	char	*str;
+
+	if (line[0] != '1')
 	{
-		if (*line != '1')
-			err_exit("Map ERROR1");
-		*line++;
+		str = ft_strjoin("No left wall at line ", ft_itoa(app->game.height));
+		err_exit(str, free);
 	}
+	if (line[app->game.width - 1] != '1')
+	{
+		str = ft_strjoin("Bad width at line ", ft_itoa(app->game.height));
+		err_exit(str, free);
+	}
+}
+
+void	check_h_line(t_app *app, char *line, int bottom)
+{
+	if (!is_horizontal_wall(line))
+	{
+		if (bottom)
+			err_exit("Bad bottom wall", NULL);
+		else
+			err_exit("Bad top wall", NULL);
+	}
+	if (!app->game.width)
+		app->game.width = ft_strlen(line);
+}
+
+int	read_line(t_app *app, char *line)
+{
+	int	i;
+	int	e;
+
+	i = 0;
+	e = 0;
+	while (i < app->game.width)
+	{
+		if (line[i] == 'C')
+			app->game.coll_left++;
+		if (line[i] == 'P')
+		{
+			app->game.player.x = i;
+			app->game.player.y = app->game.height - 1;
+		}
+		if (line[i] == 'M')
+			app->game.en_count++;
+		if (line[i] == 'E')
+			e++;
+		i++;
+	}
+	if (!e)
+		return (0);
+	return (1);
+}
+
+void	map_check(t_app *app)
+{
+	if (!app->game.coll_left)
+		err_exit("Missing Collectible", NULL);
+	if (!app->game.player.x || !app->game.player.y)
+		err_exit("Missing Player", NULL);
+}
+
+int	has_exit(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i] != '\0')
+		if (line[i++] == 'E')
+			return (1);
+	return (0);
 }
 
 void	read_map(t_app *app, const char *file)
 {
 	int		fd;
 	char	*line;
-	int		nLines;
-	int		len;
+	int		exits;
+	int		ret;
 
-	nLines = 0;
+	exits = 0;
 	fd = open(file, O_RDONLY);
-	app->game.width = 0;
-	app->game.height = 0;
-	while (get_next_line(fd, &line) >= 0)
+	if (fd < 4)
+		err_exit("Invalid file path @read_map", NULL);
+	while (1)
 	{
-		++nLines;
-		while (nLines == 1 && *line == '1')
-		{
-			if (*line != '1')
-				err_exit("Map ERROR1");
-			*line++;
-		}
-		printf("FD: %d\nLine: %s\n", fd, line);
-		if (*line == '1')
-		{
-			app->game.height++;
-			len = ft_strlen(line);
-			if (*line + len - 1 != '1')
-				err_exit("Map ERROR2");
-			if (app->game.width && len != app->game.width)
-				err_exit("Map ERROR3");
-			app->game.width = len;
-		}
-		else
-		{
-			printf("%d\n", nLines);
-			printf("%s\n", file);
-			err_exit("Map ERROR4");
-		}
+		ret = get_next_line(fd, &line);
+		++app->game.height;
+		if (app->game.height == 1)
+			check_h_line(app, line, 0);
+		check_sides(app, line);
+		read_line(app, line);
+		if (!exits)
+			exits += has_exit(line);
+		if (is_horizontal_wall(line) && app->game.height > 1)
+			check_h_line(app, line, 1);
+
+		printf("Line: %s\nHeight: %d\n", line, app->game.height);
+
 		free(line);
-		printf("Width: %d\nHeight: %d\n", app->game.width, app->game.height);
+		if (ret == 0)
+			break;
 	}
-	// parseMap(&app->game, fd);
+	// printf("Line: %s", line);
+	close(fd);
+
+	printf("Width: %d\n\n", app->game.width);
+
+	printf("Exits: %d\n", exits);
+	if (!exits)
+		err_exit("Missing Exit", NULL);
+
+	printf("FD: %d\nFile: %s\n", fd, file);
+	printf("x: %d\ty: %d\n", app->game.player.x, app->game.player.y);
 }

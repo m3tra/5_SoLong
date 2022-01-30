@@ -6,13 +6,13 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 20:20:02 by fporto            #+#    #+#             */
-/*   Updated: 2021/08/11 23:52:17 by fporto           ###   ########.fr       */
+/*   Updated: 2022/01/26 01:14:12 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	is_set(char c, char *set)
+static int	is_set(char c, const char *set)
 {
 	size_t	i;
 
@@ -26,22 +26,22 @@ static int	is_set(char c, char *set)
 	return (0);
 }
 
-static int	nset(char *s, char *set)
+static int	nset(const char *s, const char *set)
 {
 	size_t	i;
 	size_t	n;
 
 	i = 0;
 	n = 0;
-	while (is_set(s[i], (char *)set) && s[i])
+	while (is_set(s[i], set) && s[i])
 	{
 		i++;
 		n++;
 	}
-	if (i < ft_strlen((char *)s))
+	if (i < ft_strlen(s))
 	{
-		i = ft_strlen((char *)s) - 1;
-		while (is_set(s[i], (char *)set) && s[i])
+		i = ft_strlen(s) - 1;
+		while (is_set(s[i], set) && s[i])
 		{
 			i--;
 			n++;
@@ -60,14 +60,14 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (!s1 || !set)
 		return (NULL);
 	i = 0;
-	while (is_set(s1[i], (char *)set))
+	while (is_set(s1[i], set))
 		i++;
 	start = i;
-	i = ft_strlen((char *)s1) - 1;
-	while (i > 0 && is_set(s1[i], (char *)set))
+	i = ft_strlen(s1) - 1;
+	while (i > 0 && is_set(s1[i], set))
 		i--;
 	end = i;
-	str = malloc(ft_strlen((char *)s1) - nset((char *)s1, (char *)set) + 1);
+	str = malloc(ft_strlen((const char *)s1) - nset(s1, set) + 1);
 	if (!str)
 		return (NULL);
 	i = 0;

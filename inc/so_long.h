@@ -6,6 +6,7 @@
 # include <fcntl.h>
 
 # include "libft.h"
+# include "get_next_line.h"
 # include "mlx.h"
 # include "mlx_keys.h"
 # include "map.h"
@@ -62,7 +63,7 @@ typedef struct s_app
 	t_game		game;
 }				t_app;
 
-void	err_exit(char *err);
+void	err_exit(char *err, void (*del)(void *));
 void	read_map(t_app *app, const char *file);
 
 #endif

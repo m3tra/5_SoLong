@@ -6,13 +6,14 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:40:32 by fporto            #+#    #+#             */
-/*   Updated: 2021/10/25 22:44:03 by fporto           ###   ########.fr       */
+/*   Updated: 2022/01/26 04:39:38 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include "get_next_line.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <stddef.h>
@@ -21,8 +22,8 @@
 
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <sys/types.h>
 # include <fcntl.h>
-# include "gnl/get_next_line.h"
 
 typedef struct s_list
 {

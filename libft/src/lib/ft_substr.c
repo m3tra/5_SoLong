@@ -6,13 +6,13 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 19:08:35 by fporto            #+#    #+#             */
-/*   Updated: 2021/10/21 04:01:57 by fporto           ###   ########.fr       */
+/*   Updated: 2022/01/26 01:14:47 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	rng(char *s, unsigned int start, size_t len)
+static int	rng(const char *s, unsigned int start, size_t len)
 {
 	size_t	i;
 
@@ -34,7 +34,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	j = 0;
-	range = rng((char *)s, start, len);
+	range = rng(s, start, len);
 	str = malloc(range + 1);
 	if (ft_strlen(s) >= start)
 	{
