@@ -6,134 +6,110 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 23:00:44 by fporto            #+#    #+#             */
-/*   Updated: 2022/01/27 23:10:41 by fporto           ###   ########.fr       */
+/*   Updated: 2022/02/01 09:30:38 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	is_horizontal_wall(char *line)
-{
-	while (*line)
-		if (*line++ != '1')
-			return (0);
-	return (1);
-}
-
-void	check_sides(t_app *app, char *line)
-{
-	char	*str;
-
-	if (line[0] != '1')
-	{
-		str = ft_strjoin("No left wall at line ", ft_itoa(app->game.height));
-		err_exit(str, free);
-	}
-	if (line[app->game.width - 1] != '1')
-	{
-		str = ft_strjoin("Bad width at line ", ft_itoa(app->game.height));
-		err_exit(str, free);
-	}
-}
-
-void	check_h_line(t_app *app, char *line, int bottom)
-{
-	if (!is_horizontal_wall(line))
-	{
-		if (bottom)
-			err_exit("Bad bottom wall", NULL);
-		else
-			err_exit("Bad top wall", NULL);
-	}
-	if (!app->game.width)
-		app->game.width = ft_strlen(line);
-}
-
-int	read_line(t_app *app, char *line)
+void	scan_line(t_app *app, char *line, int height)
 {
 	int	i;
-	int	e;
+	int	exits;
 
 	i = 0;
-	e = 0;
+	exits = 0;
+	check_chars(app, line);
 	while (i < app->game.width)
 	{
 		if (line[i] == 'C')
-			app->game.coll_left++;
+			app->game.colls++;
 		if (line[i] == 'P')
 		{
 			app->game.player.x = i;
-			app->game.player.y = app->game.height - 1;
+			app->game.player.y = height;
 		}
 		if (line[i] == 'M')
 			app->game.en_count++;
 		if (line[i] == 'E')
-			e++;
+			app->game.exits++;
 		i++;
 	}
-	if (!e)
-		return (0);
-	return (1);
 }
 
-void	map_check(t_app *app)
+void	map_height(t_app *app, const char *file)
 {
-	if (!app->game.coll_left)
-		err_exit("Missing Collectible", NULL);
-	if (!app->game.player.x || !app->game.player.y)
-		err_exit("Missing Player", NULL);
+	int		fd;
+	char	*line;
+	int		ret;
+
+	fd = open(file, O_RDONLY);
+	if (fd < 4)
+		err_exit("Invalid file path @load_map", app);
+	while (1)
+	{
+		ret = get_next_line(fd, &line);
+		if (line[0])
+			app->game.height++;
+		free(line);
+		if (!ret)
+			break ;
+	}
+	close(fd);
 }
 
-int	has_exit(char *line)
+void	load_map(t_app *app, const char *file)
 {
-	int i;
+	int		fd;
+	char	*line;
+	int		ret;
+	int		i;
 
+	map_height(app, file);
+	fd = open(file, O_RDONLY);
+	if (fd < 4)
+		err_exit("Invalid file path @load_map", app);
+	app->game.map = malloc(sizeof(char *) * app->game.height);
+	if (!app->game.map)
+		err_exit("Failed malloc of app->game.map", app);
 	i = 0;
-	while (line[i] != '\0')
-		if (line[i++] == 'E')
-			return (1);
-	return (0);
+	while (i < app->game.height)
+	{
+		ret = get_next_line(fd, &line);
+		app->game.map[i] = ft_strdup(line);
+		free(line);
+		i++;
+	}
+	close(fd);
 }
 
 void	read_map(t_app *app, const char *file)
 {
-	int		fd;
-	char	*line;
-	int		exits;
-	int		ret;
+	int	i;
+	int	j;
 
-	exits = 0;
-	fd = open(file, O_RDONLY);
-	if (fd < 4)
-		err_exit("Invalid file path @read_map", NULL);
-	while (1)
+	i = 0;
+	j = 0;
+	load_map(app, file);
+	while (i < app->game.height)
 	{
-		ret = get_next_line(fd, &line);
-		++app->game.height;
-		if (app->game.height == 1)
-			check_h_line(app, line, 0);
-		check_sides(app, line);
-		read_line(app, line);
-		if (!exits)
-			exits += has_exit(line);
-		if (is_horizontal_wall(line) && app->game.height > 1)
-			check_h_line(app, line, 1);
-
-		printf("Line: %s\nHeight: %d\n", line, app->game.height);
-
-		free(line);
-		if (ret == 0)
-			break;
+		if (i == 0)
+			check_h_wall(app, app->game.map[i], 0);
+		else if (i == app->game.height - 1)
+			check_h_wall(app, app->game.map[i], 1);
+		else
+		{
+			check_sides(app, app->game.map[i]);
+			scan_line(app, app->game.map[i], i);
+		}
+		i++;
 	}
-	// printf("Line: %s", line);
-	close(fd);
-
-	printf("Width: %d\n\n", app->game.width);
-
-	printf("Exits: %d\n", exits);
-	if (!exits)
-		err_exit("Missing Exit", NULL);
-
-	printf("FD: %d\nFile: %s\n", fd, file);
-	printf("x: %d\ty: %d\n", app->game.player.x, app->game.player.y);
+	map_check(app);
+	if (!app->game.exits)
+		err_exit("Missing Exit", app);
+	printf("Width: %d\nHeight: %d\n", app->game.width, app->game.height);
+	printf("Exits: %d\n", app->game.exits);
+	printf("Collectibles: %d\n", app->game.colls);
+	printf("File: %s\n", file);
+	printf("Starting pos: (x: %d y: %d)\n", app->game.player.x, app->game.player.y);
 }

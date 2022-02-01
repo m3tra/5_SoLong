@@ -111,7 +111,7 @@ endif
 DFLAGS := -g
 
 # Address sanitizing flags
-ASAN := -fsanitize=address -fsanitize-recover=address
+ASAN := -fsanitize=address
 ASAN += -fno-omit-frame-pointer -fno-common
 ASAN += -fsanitize=pointer-subtract -fsanitize=pointer-compare
 # Technicaly UBSan but works with ASan
@@ -154,7 +154,7 @@ LIBS += -L./minilibx-linux/ -lmlx -lm -lXext -lX11
 # DEFAULT_LIB_RULES. The targets will have to format <library root>//<target>
 # and it will invoke make as follows:
 # `make -C <library root> <rule>`
-# DEFAULT_LIBS := ${LIBFT_ROOT}
+DEFAULT_LIBS := ${LIBFT_ROOT}
 
 # Default targets to create for libraries specified in DEFAULT_LIBS. This is a
 # small list of common targets in most makefiles.

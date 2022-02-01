@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/01 08:52:58 by fporto            #+#    #+#             */
+/*   Updated: 2022/02/01 08:52:59 by fporto           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MAP_H
 # define MAP_H
 
@@ -14,12 +26,12 @@
 // # define ENEM_XPM "enemy64.xpm"
 // # define PLAY_XPM "player64.xpm"
 
-# define MAP_CHARS "01CEPB"
+# define MAP_CHARS "01ECPB"
 
 # define MAP "./map.ber"
 
 # define BG '0'
-# define WALL 'W'
+# define WALL '1'
 # define EXIT 'E'
 # define COLL 'C'
 # define PLAYER 'P'
@@ -32,7 +44,7 @@
 # define TEXLILBROOM "./textures/xpm/test/lilbroom.xpm"
 # define TEXMIGUEL "./textures/xpm/test/miguel.xpm"
 # define TEXPHILL "./textures/xpm/test/phill.xpm"
-# define TEXPLAYER "./textures/xpm/test/player.xpm"
+# define TEXPLAYER "./textures/xpm/test/dababy.xpm"
 # define TEXWALL "./textures/xpm/test/wall.xpm"
 
 #endif
