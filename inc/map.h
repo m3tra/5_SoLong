@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 08:52:58 by fporto            #+#    #+#             */
-/*   Updated: 2022/02/01 08:52:59 by fporto           ###   ########.fr       */
+/*   Updated: 2022/02/05 04:45:53 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,30 @@
 # define PLAYER 'P'
 # define ENEMY 'B'
 
-# define TEXCOIN "./textures/xpm/test/coin.xpm"
-# define TEXENEMY "./textures/xpm/test/enemy.xpm"
-# define TEXEXIT "./textures/xpm/test/exit.xpm"
-# define TEXBG "./textures/xpm/test/grass.xpm"
-# define TEXLILBROOM "./textures/xpm/test/lilbroom.xpm"
-# define TEXMIGUEL "./textures/xpm/test/miguel.xpm"
-# define TEXPHILL "./textures/xpm/test/phill.xpm"
-# define TEXPLAYER "./textures/xpm/test/dababy.xpm"
-# define TEXWALL "./textures/xpm/test/wall.xpm"
+// DEFAULT VERSION
+
+// # define TEXCOLL0 "./textures/xpm/test/coin.xpm"
+// # define TEXCOLL1 "./textures/xpm/test/coin.xpm"
+// # define TEXCOLL2 "./textures/xpm/test/coin.xpm"
+// # define TEXCOLL3 "./textures/xpm/test/coin.xpm"
+// # define TEXENEMY0 "./textures/xpm/test/enemy.xpm"
+// # define TEXENEMY1 "./textures/xpm/test/enemy.xpm"
+// # define TEXEXIT "./textures/xpm/test/exit.xpm"
+// # define TEXBG "./textures/xpm/test/grass.xpm"
+// # define TEXPLAYER "./textures/xpm/test/mario.xpm"
+// # define TEXWALL "./textures/xpm/test/wall.xpm"
+
+// MEME VERSION
+
+# define TEXCOLL0 "./textures/xpm/miguel64_0.xpm"
+# define TEXCOLL1 "./textures/xpm/miguel64_1.xpm"
+# define TEXCOLL2 "./textures/xpm/miguel64_2.xpm"
+# define TEXCOLL3 "./textures/xpm/miguel64_3.xpm"
+# define TEXENEMY0 "./textures/xpm/phill64_0.xpm"
+# define TEXENEMY1 "./textures/xpm/phill64_1.xpm"
+# define TEXEXIT "./textures/xpm/trapdoor64.xpm"
+# define TEXBG "./textures/xpm/grass64.xpm"
+# define TEXPLAYER "./textures/xpm/lilbroom.xpm"
+# define TEXWALL "./textures/xpm/wall.xpm"
 
 #endif

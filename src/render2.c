@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 08:40:26 by fporto            #+#    #+#             */
-/*   Updated: 2022/02/01 08:46:28 by fporto           ###   ########.fr       */
+/*   Updated: 2022/02/05 05:08:56 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,29 @@ void	render_player(t_app *app)
 	place_img(app, PLAYER, (t_pos){x, y});
 }
 
-void	render_rest(t_app *app)
+void	render_steps(t_app *app)
 {
-	render_player(app);
-	mlx_put_image_to_window(app->mlx, app->screen.win, app->screen.img->img, \
-		0, 0);
+	char	*str;
+	char	*str2;
+
+	str = ft_itoa(app->game.steps);
+	str2 = ft_strjoin("Steps: ", str);
+	mlx_string_put(app->mlx, app->screen.win, 1, 10, 0x00FFFFFF, str2);
+	free(str);
+	free(str2);
 }
 
 //////////////////// LOGIC ////////////////////
 
 int	update(t_app *app)
 {
-	int	color;
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	color = 0;
-	render_rest(app);
+	app->screen.frame_count++;
+	frame(app);
+	render_player(app);
+	render_coll(app);
+	render_enemies(app);
+	mlx_put_image_to_window(app->mlx, app->screen.win, app->screen.img->img, \
+		0, 0);
+	render_steps(app);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 08:41:44 by fporto            #+#    #+#             */
-/*   Updated: 2022/02/01 08:43:53 by fporto           ###   ########.fr       */
+/*   Updated: 2022/02/05 04:57:44 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,19 @@ void	screen_init(t_app *app)
 			&app->screen.img->endian);
 }
 
-int	init(t_app *app)
+int	init(t_app *app, const char *file)
 {
 	app->mlx = mlx_init();
 	if (!app->mlx)
 		err_exit("mlx_init FAILED", app);
-	read_map(app, MAP);
+	read_map(app, file);
 	screen_init(app);
 	return (0);
 }
 
 void	first_frame(t_app *app)
 {
+	app->screen.frame_count = 1;
 	render_out_walls(app);
 	render_bg(app);
 	render_in_walls(app);

@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 23:00:44 by fporto            #+#    #+#             */
-/*   Updated: 2022/02/01 09:30:38 by fporto           ###   ########.fr       */
+/*   Updated: 2022/02/06 23:42:27 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	map_height(t_app *app, const char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 4)
-		err_exit("Invalid file path @load_map", app);
+		err_exit("Invalid file path @map_height", app);
 	while (1)
 	{
 		ret = get_next_line(fd, &line);
@@ -107,9 +107,4 @@ void	read_map(t_app *app, const char *file)
 	map_check(app);
 	if (!app->game.exits)
 		err_exit("Missing Exit", app);
-	printf("Width: %d\nHeight: %d\n", app->game.width, app->game.height);
-	printf("Exits: %d\n", app->game.exits);
-	printf("Collectibles: %d\n", app->game.colls);
-	printf("File: %s\n", file);
-	printf("Starting pos: (x: %d y: %d)\n", app->game.player.x, app->game.player.y);
 }

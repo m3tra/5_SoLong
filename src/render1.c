@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 08:38:32 by fporto            #+#    #+#             */
-/*   Updated: 2022/02/01 08:39:11 by fporto           ###   ########.fr       */
+/*   Updated: 2022/02/05 18:12:24 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,13 @@ void	render_coll(t_app *app)
 	while (++y < app->game.height)
 	{
 		while (++x < app->game.width)
+		{
 			if (app->game.map[y][x] == COLL)
+			{
+				place_img(app, BG, (t_pos){.x = x, .y = y});
 				place_img(app, COLL, (t_pos){.x = x, .y = y});
+			}
+		}
 		x = 0;
 	}
 }

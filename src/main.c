@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 04:49:20 by fporto            #+#    #+#             */
-/*   Updated: 2022/02/01 13:34:57 by fporto           ###   ########.fr       */
+/*   Updated: 2022/02/05 18:08:51 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	err_exit(char *err, t_app *app)
 	ft_putstr_fd("Error\n", 1);
 	ft_putstr_fd(err, 1);
 	ft_putchar_fd('\n', 1);
-	// free_map(&app->game);
 	exit(EXIT_FAILURE);
 }
 
@@ -47,7 +46,7 @@ int	stop(void *param)
 
 	app = ((t_app *)param);
 	if (!app->game.steps)
-		free(app->screen.img);
+		mlx_destroy_image(app->mlx, app->screen.img->img);
 	free_map(&app->game);
 	mlx_destroy_window(app->mlx, app->screen.win);
 	free(app);
@@ -70,43 +69,19 @@ int	key_hook(int keycode, void *param)
 	return (1);
 }
 
-// int	key_hook(int keycode, void *param)
-// {
-// 	t_app	*app;
-// 	int		x;
-// 	int		y;
-
-// 	app = (t_app *)param;
-// 	x = app->game.player.x;
-// 	y = app->game.player.y;
-// 	if (keycode == MLX_KEY_ESC)
-// 		stop(app);
-// 	if (keycode == MLX_KEY_W)
-// 		if (app->game.map[y - 1][x] != WALL)
-// 			app->game.player.y -= 1;
-// 	if (keycode == MLX_KEY_A)
-// 		if (app->game.map[y][x - 1] != WALL)
-// 			app->game.player.x -= 1;
-// 	if (keycode == MLX_KEY_S)
-// 		if (app->game.map[y + 1][x] != WALL)
-// 			app->game.player.y += 1;
-// 	if (keycode == MLX_KEY_D)
-// 		if (app->game.map[y][x + 1] != WALL)
-// 			app->game.player.x += 1;
-// 	app->game.steps++;
-// 	if (app->game.map[app->game.player.y][app->game.player.x] == ENEMY)
-// 		stop(app);
-// 	return (1);
-// }
-
 //////////////////// MAIN ////////////////////
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_app	*app;
 
+	if (argc != 2)
+	{
+		err_exit("Error\nWrong number of parameter.\n", NULL);
+		return (1);
+	}
 	app = ft_calloc(1, sizeof(t_app));
-	if (init(app))
+	if (init(app, argv[1]))
 		err_exit("init FAILED", app);
 	first_frame(app);
 	mlx_hook(app->screen.win, 17, (1L << 17), stop, app);

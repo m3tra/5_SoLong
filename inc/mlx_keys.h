@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_keys.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/05 18:13:04 by fporto            #+#    #+#             */
+/*   Updated: 2022/02/05 18:30:13 by fporto           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MLX_KEYS_H
 # define MLX_KEYS_H
 
@@ -79,25 +91,25 @@
 #   define MLX_KEY_0 29
 #   define MLX_KEY_MINUS 27
 #   define MLX_KEY_EQ 24
-#   define MLX_KEY_Q 12
-#   define MLX_KEY_W 13
-#   define MLX_KEY_E 14
-#   define MLX_KEY_R 15
-#   define MLX_KEY_T 17
-#   define MLX_KEY_Y 16
-#   define MLX_KEY_U 32
-#   define MLX_KEY_I 34
-#   define MLX_KEY_O 31
-#   define MLX_KEY_P 35
 #   define MLX_KEY_A 0
-#   define MLX_KEY_S 1
 #   define MLX_KEY_D 2
+#   define MLX_KEY_E 14
 #   define MLX_KEY_F 3
 #   define MLX_KEY_G 5
 #   define MLX_KEY_H 4
+#   define MLX_KEY_I 34
 #   define MLX_KEY_J 38
 #   define MLX_KEY_K 40
 #   define MLX_KEY_L 37
+#   define MLX_KEY_O 31
+#   define MLX_KEY_P 35
+#   define MLX_KEY_Q 12
+#   define MLX_KEY_R 15
+#   define MLX_KEY_S 1
+#   define MLX_KEY_T 17
+#   define MLX_KEY_U 32
+#   define MLX_KEY_W 13
+#   define MLX_KEY_Y 16
 
 #  endif
 # endif

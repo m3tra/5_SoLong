@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 14:27:40 by fporto            #+#    #+#             */
-/*   Updated: 2022/01/26 00:43:03 by fporto           ###   ########.fr       */
+/*   Updated: 2022/02/05 18:37:01 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ static	void	*init(void)
 	return ((void *)arr);
 }
 
-static int	save_line(char **lineread, char *buffer, char **line, ssize_t nreadbytes)
+static int	save_line(char **linerd, char *buffr, char **line, ssize_t nrdbytes)
 {
-	if (nreadbytes == -1)
+	if (nrdbytes == -1)
 	{
-		free(buffer);
-		free(*lineread);
-		*lineread = NULL;
+		free(buffr);
+		free(*linerd);
+		*linerd = NULL;
 		return (-1);
 	}
-	if (!ft_strchr(*lineread, '\n'))
+	if (!ft_strchr(*linerd, '\n'))
 	{
-		free(buffer);
-		*line = *lineread;
-		*lineread = NULL;
+		free(buffr);
+		*line = *linerd;
+		*linerd = NULL;
 	}
 	return (0);
 }

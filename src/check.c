@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 08:37:29 by fporto            #+#    #+#             */
-/*   Updated: 2022/02/01 11:38:38 by fporto           ###   ########.fr       */
+/*   Updated: 2022/02/05 18:09:30 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 void	check_sides(t_app *app, char *line)
 {
-	if (line[0] != WALL)
-		err_exit("Bad vertical wall", app);
-	if (line[app->game.width - 1] != WALL)
+	if (line[0] != WALL || line[app->game.width - 1] != WALL)
 		err_exit("Bad vertical wall", app);
 }
 
 void	check_h_wall(t_app *app, char *line, int bottom)
 {
 	int	i;
-	int	l;
+	int	wall;
 
 	i = 0;
-	l = 1;
+	wall = 1;
 	while (line[i])
 		if (line[i++] != WALL)
-			l = 0;
-	if (!l)
+			wall = 0;
+	if (!wall)
 	{
 		if (bottom)
 			err_exit("Bad bottom wall", app);
