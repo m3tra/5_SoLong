@@ -286,7 +286,7 @@ clean_dep: $$(call get_lib_target,$${DEFAULT_LIBS},$$@)
 
 clean_all: fclean clean_dep
 
-re: fclean all
+re: clean_all all
 
 ################################################################################
 # Debug Targets
