@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:15:23 by fporto            #+#    #+#             */
-/*   Updated: 2021/09/08 14:15:43 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/09 16:26:44 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,9 @@ int	ft_isstrdigit(char *str)
 {
 	int	i;
 
-	i = 0;
-	while (str[i])
-	{
+	i = -1;
+	while (str[++i])
 		if (!ft_isdigit(str[i]))
 			return (0);
-		i++;
-	}
 	return (1);
 }

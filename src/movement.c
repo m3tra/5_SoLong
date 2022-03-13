@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:15:04 by fporto            #+#    #+#             */
-/*   Updated: 2022/02/05 04:46:26 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/13 13:35:49 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ void	can_move(t_app *app, int keycode, int x, int y)
 	map = app->game.map;
 	if (map[y][x] != WALL)
 	{
-		if (map[y][x] == EXIT && !app->game.colls)
+		if ((map[y][x] == EXIT && !app->game.colls) || map[y][x] == ENEMY)
 			stop(app);
 		if (map[y][x] == COLL)
 		{
 			map[y][x] = '0';
 			app->game.colls--;
 		}
-		if (map[y][x] == BG || map[y][x] == PLAYER || map[y][x] == ENEMY)
+		if (map[y][x] == BG || map[y][x] == PLAYER)
 			move(app, keycode);
 	}
 }

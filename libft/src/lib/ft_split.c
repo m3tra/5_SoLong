@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:21:53 by fporto            #+#    #+#             */
-/*   Updated: 2021/08/11 23:51:38 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/09 20:11:34 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static size_t	nb_words(char *s, char c)
 {
-	size_t		i;
-	size_t		nb;
+	size_t	i;
+	size_t	nb;
 
 	if (s)
 	{
@@ -24,9 +24,7 @@ static size_t	nb_words(char *s, char c)
 		while (s[i])
 		{
 			while (s[i] && s[i] == c)
-			{
 				i++;
-			}
 			if (!s[i])
 				return (0);
 			while (s[i] && s[i] != c)
@@ -42,7 +40,7 @@ static size_t	nb_words(char *s, char c)
 
 static int	spaces(char *s, char c)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (s[i] == c)
@@ -52,8 +50,8 @@ static int	spaces(char *s, char c)
 
 static char	*get_word(char *s, char c)
 {
-	char		*word;
-	size_t		i;
+	char	*word;
+	size_t	i;
 
 	i = 0;
 	if (s[i])
@@ -79,7 +77,7 @@ static char	*get_word(char *s, char c)
 
 static char	*append(char **arr, char *s, int n, char c)
 {
-	char		*word;
+	char	*word;
 
 	word = get_word(s, c);
 	arr[n] = word;
@@ -88,11 +86,11 @@ static char	*append(char **arr, char *s, int n, char c)
 
 char	**ft_split(char const *s, char c)
 {
-	char		**arr;
-	char		*str;
-	size_t		i;
-	size_t		start;
-	size_t		nb;
+	char	**arr;
+	char	*str;
+	size_t	i;
+	size_t	start;
+	size_t	nb;
 
 	if (s == NULL)
 		return (NULL);

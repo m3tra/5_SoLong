@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 19:38:22 by fporto            #+#    #+#             */
-/*   Updated: 2021/08/17 19:29:44 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/09 16:32:53 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static size_t	ft_nlen(int n)
 {
-	size_t		len;
+	size_t	len;
 
 	len = 0;
 	if (!n)
@@ -42,10 +42,10 @@ static char	*cat(char *str, long number, int i, int neg)
 
 char	*ft_itoa(long n)
 {
-	char		*number;
-	int			neg;
-	size_t		len;
-	int			i;
+	char	*number;
+	int		neg;
+	size_t	len;
+	int		i;
 
 	neg = 0;
 	if (n < 0)

@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:35:04 by fporto            #+#    #+#             */
-/*   Updated: 2021/08/11 23:46:54 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/09 16:33:08 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_atoi(const char *s)
 {
-	int		neg;
-	int		pos;
-	int		result;
+	int	neg;
+	int	pos;
+	int	result;
 
 	neg = 1;
 	pos = 0;

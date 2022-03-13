@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 04:49:20 by fporto            #+#    #+#             */
-/*   Updated: 2022/02/10 14:03:44 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/13 13:38:48 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	stop(void *param)
 	t_app	*app;
 
 	app = ((t_app *)param);
-	if (!app->game.steps)
+	if (!app->game.steps || app->screen.img->img)
 		mlx_destroy_image(app->mlx, app->screen.img->img);
 	if (app->screen.img)
 		free(app->screen.img);

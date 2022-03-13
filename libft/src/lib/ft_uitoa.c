@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 19:38:22 by fporto            #+#    #+#             */
-/*   Updated: 2021/08/16 02:21:47 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/09 16:34:36 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static size_t	ft_nlen(unsigned int n)
 {
-	size_t		len;
+	size_t	len;
 
 	len = 0;
 	if (!n)
@@ -27,12 +27,14 @@ static size_t	ft_nlen(unsigned int n)
 	return (len);
 }
 
-static char	*cat(char *str, long number, int i)
+static char	*cat(char *str, long number, size_t i)
 {
 	while (i >= 0)
 	{
 		str[i] = (number % 10) + '0';
 		number /= 10;
+		if (i == 0)
+			break;
 		i--;
 	}
 	return (str);
@@ -40,9 +42,9 @@ static char	*cat(char *str, long number, int i)
 
 char	*ft_uitoa(unsigned int n)
 {
-	char			*number;
-	size_t			len;
-	int				i;
+	char	*number;
+	size_t	len;
+	size_t	i;
 
 	len = ft_nlen(n);
 	number = malloc(len + 1);
