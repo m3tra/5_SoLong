@@ -6,13 +6,11 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 04:49:20 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/13 13:38:48 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/14 15:07:15 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-//////////////////// FREE ////////////////////
 
 void	free_map(t_game *game)
 {
@@ -27,8 +25,6 @@ void	free_map(t_game *game)
 	}
 }
 
-//////////////////// ERROR ////////////////////
-
 void	err_exit(char *err, t_app *app)
 {
 	(void)app;
@@ -37,8 +33,6 @@ void	err_exit(char *err, t_app *app)
 	ft_putchar_fd('\n', 1);
 	exit(EXIT_FAILURE);
 }
-
-//////////////////// HOOKS ////////////////////
 
 int	stop(void *param)
 {
@@ -70,8 +64,6 @@ int	key_hook(int keycode, void *param)
 		stop(app);
 	return (1);
 }
-
-//////////////////// MAIN ////////////////////
 
 int	main(int argc, char **argv)
 {

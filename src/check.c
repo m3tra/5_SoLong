@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 08:37:29 by fporto            #+#    #+#             */
-/*   Updated: 2022/02/05 18:09:30 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/14 15:07:28 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,11 @@ void	check_width(t_app *app)
 void	check_chars(t_app *app, char *line)
 {
 	int		i;
-	int		j;
 	int		k;
 	int		bad;
 	char	*chars;
 
 	i = 0;
-	j = 0;
 	chars = MAP_CHARS;
 	while (line[i])
 	{
