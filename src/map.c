@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 23:00:44 by fporto            #+#    #+#             */
-/*   Updated: 2022/02/06 23:42:27 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/14 15:03:52 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,8 @@ void	load_map(t_app *app, const char *file)
 void	read_map(t_app *app, const char *file)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	load_map(app, file);
 	while (i < app->game.height)
 	{
